@@ -1,0 +1,36 @@
+﻿@{
+	ViewBag.Title = "Home Page";
+	var fromDate = (DateTime?) ViewBag.fromDate;
+	var toDate = (DateTime?) ViewBag.toDate;
+}
+
+@using (Html.BeginForm("ProjectReport", "Home", FormMethod.Get))
+{
+	<br />
+	<label >From Date:</label>
+	<div>@Html.TextBox("fromDate", string.Format("{0:dd-MMM-yyyy}", fromDate), new { @class = "DatePicker form-control" })</div>
+	<br />
+	<label>To Date:</label>
+	<div>@Html.TextBox("toDate", string.Format("{0:dd-MMM-yyyy}", fromDate), new {@class = "DatePicker form-control", id = "s"})</div>
+	<br/>
+	<input class="btn btn-primary btn-block"  type="submit" value="Download" />
+}
+
+
+@section scripts
+{
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			$(".DatePicker").datepicker({
+				dateFormat: "dd M yy",
+				changeMonth: true,
+				changeYear: true
+			});
+			$('#s').datepicker("setDate", new Date());
+
+
+		});
+	</script>
+
+}
